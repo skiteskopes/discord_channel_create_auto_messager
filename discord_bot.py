@@ -12,6 +12,7 @@ data = json.load(f)
 TOKEN = data['token']
 servers = data['servers']
 message = data['message']
+delay = int(data['delay'])
 for i in range(len(servers)):
     servers[i] = int(servers[i])
 
@@ -21,5 +22,6 @@ bot = discord.Client(token=TOKEN)
 async def on_guild_channel_create(channel):
     if channel.guild.id in servers:
         print(channel, "had just been created")
+        time.sleep(delay)
         await channel.send(message)
 bot.run(TOKEN)
